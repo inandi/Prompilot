@@ -1,14 +1,16 @@
-# PromptPilot 🚀
-
-**Your AI Prompt Assistant for VS Code**
+<div align="center">
+  <img src="media/logo.png" alt="PromptPilot Logo" width="128" height="128">
+  <h1>PromptPilot</h1>
+  <p><strong>Your AI Prompt Assistant for VS Code</strong></p>
+</div>
 
 Tired of retyping the same AI prompts over and over? PromptPilot makes it effortless to save, organize, and reuse your favorite AI instructions with just one click!
 
-## ✨ What is PromptPilot?
+## What is PromptPilot?
 
 PromptPilot is a simple yet powerful VS Code extension that helps you manage your custom AI prompts. Whether you're working with ChatGPT, GitHub Copilot, or any other AI assistant, PromptPilot lets you save your most-used prompts and access them instantly from your status bar.
 
-## 🎯 Why Use PromptPilot?
+## Why Use PromptPilot?
 
 - **Save Time**: No more copying and pasting the same prompts repeatedly
 - **Stay Organized**: Keep all your AI prompts in one place, organized alphabetically
@@ -16,7 +18,7 @@ PromptPilot is a simple yet powerful VS Code extension that helps you manage you
 - **Quick Access**: One-click access from your VS Code status bar
 - **Easy Management**: Add, edit, or delete prompts with a simple interface
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Installation
 
@@ -60,14 +62,14 @@ At the bottom of the prompt list, you'll find a "Manage" section where you can:
 - **Edit**: Update an existing prompt
 - **Delete**: Remove prompts you no longer need
 
-## 💡 Tips & Tricks
+## Tips & Tricks
 
 - **Organize by Project**: Use project-specific prompts for project-specific instructions
 - **Use Global Prompts**: Save your most common prompts as global so they're always available
 - **Short Names Matter**: Keep names concise and descriptive - you'll see them in the list
 - **Multi-line Support**: You can paste complex, multi-line prompts - they're fully supported!
 
-## 🤝 Support the Project
+## Support the Project
 
 If PromptPilot has made your workflow easier, consider supporting its development:
 
@@ -75,13 +77,13 @@ If PromptPilot has made your workflow easier, consider supporting its developmen
 
 Your support helps keep this extension free and continuously improved! ☕
 
-## 📝 Need Help?
+## Need Help?
 
 - **Technical Documentation**: See [Technical Documentation](doc/TECHNICAL.md) for developers
 - **Issues**: Found a bug or have a feature request? Open an issue on GitHub
 - **Questions**: Check the documentation or open a discussion
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - feel free to use it however you'd like!
 
