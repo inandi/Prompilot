@@ -112,31 +112,40 @@ export class PromptManager {
             }
         }
 
-        // Save to new location
+        // Save to new location with duplicate checking at the appropriate scope level
         if (prompt.scope === 'Global') {
             let prompts = this.getGlobalPrompts();
             
-            if (!isEdit) {
-                // Check for duplicate when adding new
-                if (prompts.some(p => p.shortName === prompt.shortName)) {
-                    vscode.window.showErrorMessage(`A prompt with the name "${prompt.shortName}" already exists.`);
-                    return;
-                }
+            // Check for duplicate at global level (excluding the prompt being edited if name unchanged)
+            const isNameChange = isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName;
+            const isScopeChange = isEdit && oldPrompt && oldPrompt.scope !== prompt.scope;
+            
+            if (isEdit && !isNameChange && !isScopeChange) {
+                // Editing same prompt without name or scope change - no duplicate check needed
             } else {
-                // When editing, check for duplicate only if name changed
-                if (oldPrompt && oldPrompt.shortName !== prompt.shortName && prompts.some(p => p.shortName === prompt.shortName)) {
-                    vscode.window.showErrorMessage(`A prompt with the name "${prompt.shortName}" already exists.`);
+                // Check for duplicate: exclude the old prompt if editing
+                const duplicateExists = prompts.some(p => {
+                    if (isEdit && oldPrompt && p.shortName === oldPrompt.shortName) {
+                        return false; // Exclude the prompt being edited
+                    }
+                    return p.shortName === prompt.shortName;
+                });
+                
+                if (duplicateExists) {
+                    vscode.window.showErrorMessage(`A global prompt with the name "${prompt.shortName}" already exists. Please choose a different name.`);
                     return;
                 }
-                // Remove old name if it changed
-                if (oldPrompt && oldPrompt.shortName !== prompt.shortName) {
-                    prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
-                }
+            }
+            
+            // Remove old name if it changed (already handled above, but keep for safety)
+            if (isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName) {
+                prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
             }
             
             prompts.push(prompt);
             this.writePrompts(this.globalPromptsPath, prompts);
         } else {
+            // Project-specific scope
             if (!this.projectPromptsPath) {
                 vscode.window.showErrorMessage('No workspace folder found. Cannot save project-specific prompt.');
                 return;
@@ -144,22 +153,30 @@ export class PromptManager {
             
             let prompts = this.getProjectPrompts();
             
-            if (!isEdit) {
-                // Check for duplicate when adding new
-                if (prompts.some(p => p.shortName === prompt.shortName)) {
-                    vscode.window.showErrorMessage(`A prompt with the name "${prompt.shortName}" already exists.`);
-                    return;
-                }
+            // Check for duplicate at project level (excluding the prompt being edited if name unchanged)
+            const isNameChange = isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName;
+            const isScopeChange = isEdit && oldPrompt && oldPrompt.scope !== prompt.scope;
+            
+            if (isEdit && !isNameChange && !isScopeChange) {
+                // Editing same prompt without name or scope change - no duplicate check needed
             } else {
-                // When editing, check for duplicate only if name changed
-                if (oldPrompt && oldPrompt.shortName !== prompt.shortName && prompts.some(p => p.shortName === prompt.shortName)) {
-                    vscode.window.showErrorMessage(`A prompt with the name "${prompt.shortName}" already exists.`);
+                // Check for duplicate: exclude the old prompt if editing
+                const duplicateExists = prompts.some(p => {
+                    if (isEdit && oldPrompt && p.shortName === oldPrompt.shortName) {
+                        return false; // Exclude the prompt being edited
+                    }
+                    return p.shortName === prompt.shortName;
+                });
+                
+                if (duplicateExists) {
+                    vscode.window.showErrorMessage(`A project-specific prompt with the name "${prompt.shortName}" already exists in this workspace. Please choose a different name.`);
                     return;
                 }
-                // Remove old name if it changed
-                if (oldPrompt && oldPrompt.shortName !== prompt.shortName) {
-                    prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
-                }
+            }
+            
+            // Remove old name if it changed (already handled above, but keep for safety)
+            if (isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName) {
+                prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
             }
             
             prompts.push(prompt);
