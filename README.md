@@ -90,5 +90,3 @@ This project is licensed under the MIT License - feel free to use it however you
 ---
 
 **Made with ❤️ by Gobinda Nandi**
-
-*Version 0.0.1 | Released December 6, 2025*
