@@ -1,3 +1,15 @@
+/**
+ * PromptPilot Extension Main Module
+ * 
+ * VS Code extension for managing custom AI instructions with a status bar button.
+ * Provides functionality to create, edit, delete, and run prompts.
+ * 
+ * @author Gobinda Nandi <email@example.com>
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
+
 import * as vscode from 'vscode';
 import { PromptManager } from './promptManager';
 import { PromptForm } from './promptForm';
@@ -6,6 +18,15 @@ let statusBarItem: vscode.StatusBarItem;
 let promptManager: PromptManager;
 let promptForm: PromptForm;
 
+/**
+ * Activates the extension.
+ * Sets up the status bar button, registers commands, and initializes prompt loading.
+ * 
+ * @param {vscode.ExtensionContext} context - The VS Code extension context
+ * @returns {void}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 export function activate(context: vscode.ExtensionContext) {
     // Initialize managers
     promptManager = new PromptManager(context);
@@ -36,12 +57,27 @@ export function activate(context: vscode.ExtensionContext) {
     loadPrompts();
 }
 
+/**
+ * Loads all prompts on startup.
+ * 
+ * @returns {void}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 function loadPrompts(): void {
     const prompts = promptManager.getAllPrompts();
     // Prompts are loaded and ready to use
     console.log(`Loaded ${prompts.length} prompt(s)`);
 }
 
+/**
+ * Shows the main prompts menu with all available prompts.
+ * Displays prompts alphabetically with "Add New" option and "Manage" group.
+ * 
+ * @returns {Promise<void>}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 async function showPromptsMenu(): Promise<void> {
     const prompts = promptManager.getAllPrompts();
     const quickPick = vscode.window.createQuickPick();
@@ -110,6 +146,13 @@ async function showPromptsMenu(): Promise<void> {
     quickPick.show();
 }
 
+/**
+ * Shows the management menu with options to edit or delete prompts.
+ * 
+ * @returns {Promise<void>}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 async function showManageMenu(): Promise<void> {
     const items: vscode.QuickPickItem[] = [
         {
@@ -137,6 +180,13 @@ async function showManageMenu(): Promise<void> {
     }
 }
 
+/**
+ * Shows a selector to choose which prompt to edit.
+ * 
+ * @returns {Promise<void>}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 async function showEditPromptSelector(): Promise<void> {
     const prompts = promptManager.getAllPrompts();
     const sortedPrompts = [...prompts].sort((a, b) => 
@@ -157,6 +207,13 @@ async function showEditPromptSelector(): Promise<void> {
     }
 }
 
+/**
+ * Shows a selector to choose which prompt to delete.
+ * 
+ * @returns {Promise<void>}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 async function showDeletePromptSelector(): Promise<void> {
     const prompts = promptManager.getAllPrompts();
     const sortedPrompts = [...prompts].sort((a, b) => 
@@ -177,6 +234,14 @@ async function showDeletePromptSelector(): Promise<void> {
     }
 }
 
+/**
+ * Runs a prompt by copying it to the clipboard.
+ * 
+ * @param {string} shortName - The short name of the prompt to run
+ * @returns {Promise<void>}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 async function runPrompt(shortName: string): Promise<void> {
     const prompt = promptManager.getPrompt(shortName);
     if (!prompt) {
@@ -191,6 +256,14 @@ async function runPrompt(shortName: string): Promise<void> {
     vscode.window.showInformationMessage(`Prompt "${shortName}" copied to clipboard. Paste (Cmd+V / Ctrl+V) it into the AI chat input.`);
 }
 
+/**
+ * Deletes a prompt after user confirmation.
+ * 
+ * @param {string} shortName - The short name of the prompt to delete
+ * @returns {Promise<void>}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 async function deletePrompt(shortName: string): Promise<void> {
     const result = await vscode.window.showWarningMessage(
         `Are you sure you want to delete the prompt "${shortName}"?`,
@@ -209,6 +282,14 @@ async function deletePrompt(shortName: string): Promise<void> {
     }
 }
 
+/**
+ * Deactivates the extension.
+ * Cleans up resources when the extension is deactivated.
+ * 
+ * @returns {void}
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ */
 export function deactivate() {
     if (statusBarItem) {
         statusBarItem.dispose();

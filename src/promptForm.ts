@@ -1,9 +1,43 @@
+/**
+ * Prompt Form Module
+ * 
+ * @author Gobinda Nandi <email@example.com>
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
+
 import * as vscode from 'vscode';
 import { Prompt, PromptManager } from './promptManager';
 
+/**
+ * Class PromptForm
+ * 
+ * Handles the UI forms for adding and editing prompts.
+ * Manages user input validation and prompt creation/editing workflow.
+ * 
+ * @author Gobinda Nandi <email@example.com>
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
 export class PromptForm {
+    /**
+     * Creates an instance of PromptForm.
+     * 
+     * @param {PromptManager} promptManager - The prompt manager instance
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
     constructor(private promptManager: PromptManager) {}
 
+    /**
+     * Shows the form to add a new prompt.
+     * 
+     * @returns {Promise<void>}
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
     async showAddForm(): Promise<void> {
         const prompt = await this.showForm();
         if (prompt) {
@@ -12,6 +46,14 @@ export class PromptForm {
         }
     }
 
+    /**
+     * Shows the form to edit an existing prompt.
+     * 
+     * @param {string} shortName - The short name of the prompt to edit
+     * @returns {Promise<void>}
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
     async showEditForm(shortName: string): Promise<void> {
         const existingPrompt = this.promptManager.getPrompt(shortName);
         if (!existingPrompt) {
@@ -26,6 +68,15 @@ export class PromptForm {
         }
     }
 
+    /**
+     * Shows the form to collect prompt information from the user.
+     * 
+     * @private
+     * @param {Prompt} [existingPrompt] - Optional existing prompt for editing
+     * @returns {Promise<Prompt | undefined>} The prompt object if form is completed, undefined if cancelled
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
     private async showForm(existingPrompt?: Prompt): Promise<Prompt | undefined> {
         // Short Name input
         const shortName = await vscode.window.showInputBox({
