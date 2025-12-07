@@ -1,7 +1,7 @@
 This release introduces below new features, performance improvements, and bug fixes.
 
 ## New Features
-- **Status Bar Integration**: Quick access to PromptPilot via a status bar button in VS Code
+- **Status Bar Integration**: Quick access to Prompilot via a status bar button in VS Code
 - **Prompt Management**: Create, edit, and delete custom AI prompts with an intuitive interface
 - **Dual Scope Support**: Choose between Global prompts (available across all workspaces) or Project-specific prompts (limited to current workspace)
 - **Alphabetical Organization**: All prompts are automatically sorted alphabetically for easy navigation

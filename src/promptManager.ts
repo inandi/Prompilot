@@ -57,7 +57,7 @@ export class PromptManager {
         if (!fs.existsSync(configDir)) {
             fs.mkdirSync(configDir, { recursive: true });
         }
-        this.globalPromptsPath = path.join(configDir, 'PromptPilot.json');
+        this.globalPromptsPath = path.join(configDir, 'Prompilot.json');
 
         // Initialize project path
         this.updateProjectPath();
@@ -79,7 +79,7 @@ export class PromptManager {
             if (!fs.existsSync(vscodeDir)) {
                 fs.mkdirSync(vscodeDir, { recursive: true });
             }
-            this.projectPromptsPath = path.join(vscodeDir, 'PromptPilot.json');
+            this.projectPromptsPath = path.join(vscodeDir, 'Prompilot.json');
         } else {
             this.projectPromptsPath = '';
         }

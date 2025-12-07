@@ -40,5 +40,4 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
-
-process.md
+dev.md

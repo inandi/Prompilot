@@ -1,15 +1,15 @@
-# PromptPilot - Technical Documentation
+# Prompilot - Technical Documentation
 
 ## Overview
 
-PromptPilot is a VS Code extension built with TypeScript that provides a user-friendly interface for managing AI prompts. The extension stores prompts in JSON format and supports both global and project-specific scopes.
+Prompilot is a VS Code extension built with TypeScript that provides a user-friendly interface for managing AI prompts. The extension stores prompts in JSON format and supports both global and project-specific scopes.
 
 ## Architecture
 
 ### File Structure
 
 ```
-PromptPilot/
+Prompilot/
 ├── src/
 │   ├── extension.ts          # Main extension entry point
 │   ├── promptManager.ts      # Handles prompt storage and retrieval
@@ -36,8 +36,8 @@ PromptPilot/
 Manages all prompt-related operations:
 
 - **Storage Locations**:
-  - Global: `~/.vscode/PromptPilot.json`
-  - Project-specific: `.vscode/PromptPilot.json` (workspace root)
+  - Global: `~/.vscode/Prompilot.json`
+  - Project-specific: `.vscode/Prompilot.json` (workspace root)
 
 - **Key Methods**:
   - `getAllPrompts()`: Returns merged prompts (project-specific takes precedence)
@@ -71,13 +71,13 @@ Handles user input and validation:
 
 ### Global Prompts
 
-- **Location**: `~/.vscode/PromptPilot.json`
+- **Location**: `~/.vscode/Prompilot.json`
 - **Scope**: Available across all VS Code workspaces
 - **Format**: JSON array of `Prompt` objects
 
 ### Project-Specific Prompts
 
-- **Location**: `.vscode/PromptPilot.json` (in workspace root)
+- **Location**: `.vscode/Prompilot.json` (in workspace root)
 - **Scope**: Only available in the current workspace
 - **Format**: JSON array of `Prompt` objects
 
