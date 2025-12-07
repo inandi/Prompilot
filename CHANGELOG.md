@@ -1,3 +1,12 @@
+# Release v1.0.2 - 2025-12-07
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- Tag creation script fixed.
+
+---
+
 # Release v1.0.1 - 2025-12-07
 
 This release introduces below new features, performance improvements, and bug fixes.
