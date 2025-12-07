@@ -1,3 +1,14 @@
+# Release v1.0.1 - 2025-12-07
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- **Rebranding**: Extension renamed from "PromptPilot" to "Prompilot" for consistency
+- **Command Update**: Command identifier updated from `promptpilot.showPrompts` to `prompilot.showPrompts`
+- **Storage File Names**: Prompt storage files renamed from `PromptPilot.json` to `Prompilot.json` (both global and project-specific)
+- **Documentation Updates**: All documentation updated to reflect the new branding across README, technical docs, and process documentation
+---
+
 # Release v0.0.2 - 2025-12-07
 
 This release introduces below new features, performance improvements, and bug fixes.
