@@ -1,0 +1,134 @@
+/**
+ * Prompt Form Module
+ * 
+ * @author Gobinda Nandi <email@example.com>
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
+
+import * as vscode from 'vscode';
+import { Prompt, PromptManager } from './promptManager';
+
+/**
+ * Class PromptForm
+ * 
+ * Handles the UI forms for adding and editing prompts.
+ * Manages user input validation and prompt creation/editing workflow.
+ * 
+ * @author Gobinda Nandi <email@example.com>
+ * @since 0.0.1 [06-12-2025]
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
+export class PromptForm {
+    /**
+     * Creates an instance of PromptForm.
+     * 
+     * @param {PromptManager} promptManager - The prompt manager instance
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
+    constructor(private promptManager: PromptManager) {}
+
+    /**
+     * Shows the form to add a new prompt.
+     * 
+     * @returns {Promise<void>}
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
+    async showAddForm(): Promise<void> {
+        const prompt = await this.showForm();
+        if (prompt) {
+            this.promptManager.savePrompt(prompt);
+            vscode.window.showInformationMessage(`Prompt "${prompt.shortName}" saved successfully.`);
+        }
+    }
+
+    /**
+     * Shows the form to edit an existing prompt.
+     * 
+     * @param {string} shortName - The short name of the prompt to edit
+     * @returns {Promise<void>}
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
+    async showEditForm(shortName: string): Promise<void> {
+        const existingPrompt = this.promptManager.getPrompt(shortName);
+        if (!existingPrompt) {
+            vscode.window.showErrorMessage(`Prompt "${shortName}" not found.`);
+            return;
+        }
+
+        const prompt = await this.showForm(existingPrompt);
+        if (prompt) {
+            this.promptManager.savePrompt(prompt, true, existingPrompt);
+            vscode.window.showInformationMessage(`Prompt "${prompt.shortName}" updated successfully.`);
+        }
+    }
+
+    /**
+     * Shows the form to collect prompt information from the user.
+     * 
+     * @private
+     * @param {Prompt} [existingPrompt] - Optional existing prompt for editing
+     * @returns {Promise<Prompt | undefined>} The prompt object if form is completed, undefined if cancelled
+     * @since 0.0.1 [06-12-2025]
+     * @version 0.0.1
+     */
+    private async showForm(existingPrompt?: Prompt): Promise<Prompt | undefined> {
+        // Short Name input
+        const shortName = await vscode.window.showInputBox({
+            prompt: 'Enter Short Name (up to 25 characters)',
+            value: existingPrompt?.shortName || '',
+            validateInput: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Short name is required';
+                }
+                if (value.length > 25) {
+                    return 'Short name must be 25 characters or less';
+                }
+                return null;
+            }
+        });
+
+        if (!shortName) {
+            return undefined;
+        }
+
+        // Detailed Instruction input (supports multi-line when pasted)
+        const detailedInstruction = await vscode.window.showInputBox({
+            prompt: 'Enter Detailed Instruction (full prompt text). You can paste multi-line text.',
+            value: existingPrompt?.detailedInstruction || '',
+            validateInput: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Detailed instruction is required';
+                }
+                return null;
+            }
+        });
+
+        if (!detailedInstruction) {
+            return undefined;
+        }
+
+        // Scope selection
+        const scopeOptions = ['Global', 'Project-specific'];
+        const scope = await vscode.window.showQuickPick(scopeOptions, {
+            placeHolder: 'Select Scope',
+            canPickMany: false
+        });
+
+        if (!scope) {
+            return undefined;
+        }
+
+        return {
+            shortName: shortName.trim(),
+            detailedInstruction: detailedInstruction.trim(),
+            scope: scope as 'Global' | 'Project-specific'
+        };
+    }
+}
+
