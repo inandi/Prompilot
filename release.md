@@ -1,0 +1,11 @@
+This release introduces below new features, performance improvements, and bug fixes.
+
+## New Features
+- **Status Bar Integration**: Quick access to PromptPilot via a status bar button in VS Code
+- **Prompt Management**: Create, edit, and delete custom AI prompts with an intuitive interface
+- **Dual Scope Support**: Choose between Global prompts (available across all workspaces) or Project-specific prompts (limited to current workspace)
+- **Alphabetical Organization**: All prompts are automatically sorted alphabetically for easy navigation
+- **One-Click Copy**: Instantly copy prompts to clipboard with a single click
+- **Multi-line Support**: Full support for complex, multi-line prompt instructions
+- **Quick Access Menu**: Fast access to all prompts through a QuickPick menu interface
+- **Prompt Validation**: Built-in validation for prompt names (max 25 characters) and duplicate checking

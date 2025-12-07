@@ -1,6 +1,6 @@
 <div align="center">
   <img src="media/logo.png" alt="PromptPilot Logo" width="128" height="128">
-  <h1>PromptPilot</h1>
+  <h1>PromptPilot [Beta]</h1>
   <p><strong>Your AI Prompt Assistant for VS Code</strong></p>
 </div>
 
@@ -61,6 +61,22 @@ When you click "Add New", you'll be asked for three things:
 At the bottom of the prompt list, you'll find a "Manage" section where you can:
 - **Edit**: Update an existing prompt
 - **Delete**: Remove prompts you no longer need
+
+### Storage Locations
+
+PromptPilot stores your prompts in JSON files for easy access and backup:
+
+- **Global Prompts**: Saved in your home directory at `~/.vscode/PromptPilot.json`
+  - On macOS/Linux: `~/.vscode/PromptPilot.json`
+  - On Windows: `C:\Users\<YourUsername>\.vscode\PromptPilot.json`
+  - These prompts are available across all VS Code workspaces
+
+- **Project-specific Prompts**: Saved in your workspace at `.vscode/PromptPilot.json`
+  - Located in the root of your current workspace folder
+  - These prompts are only available in the current project
+  - The `.vscode` folder is created automatically if it doesn't exist
+
+> **Note**: You can manually edit these JSON files if needed, or back them up to preserve your prompts.
 
 ## Tips & Tricks
 
