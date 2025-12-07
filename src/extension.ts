@@ -36,11 +36,11 @@ export function activate(context: vscode.ExtensionContext) {
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBarItem.text = '$(comment-discussion) Prompilot';
     statusBarItem.tooltip = 'Manage AI prompts';
-    statusBarItem.command = 'promptpilot.showPrompts';
+    statusBarItem.command = 'prompilot.showPrompts';
     statusBarItem.show();
 
     // Register command
-    const showPromptsCommand = vscode.commands.registerCommand('promptpilot.showPrompts', () => {
+    const showPromptsCommand = vscode.commands.registerCommand('prompilot.showPrompts', () => {
         showPromptsMenu();
     });
 

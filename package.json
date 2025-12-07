@@ -7,7 +7,7 @@
   "icon": "media/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/inandi/promptpilot.git"
+    "url": "https://github.com/inandi/prompilot.git"
   },
   "engines": {
     "vscode": "^1.74.0"
@@ -22,7 +22,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "promptpilot.showPrompts",
+        "command": "prompilot.showPrompts",
         "title": "Show Prompts"
       }
     ]
