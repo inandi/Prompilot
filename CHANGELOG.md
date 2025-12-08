@@ -1,3 +1,19 @@
+# Release v1.0.2A - 2025-12-08
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- **TypeScript Configuration**: Enhanced `tsconfig.json` with proper module resolution, Node.js type definitions, and improved compiler options for better development experience
+- **Type Safety**: Added explicit type annotations to input validation callbacks in `promptForm.ts` for improved type safety
+- **Documentation**: Expanded technical documentation (`TECHNICAL.md`) with comprehensive publishing guides for both VS Code Marketplace and Open VSX Registry
+
+## Bug Fixes
+- **Compilation Errors**: Fixed TypeScript compilation errors related to missing module declarations (`vscode`, `fs`, `path`, `os`)
+- **Type Errors**: Resolved implicit `any` type errors in form validation functions
+- **Console Errors**: Fixed missing `console` type definitions by including Node.js types in TypeScript configuration
+
+---
+
 # Release v1.0.2 - 2025-12-07
 
 This release introduces below new features, performance improvements, and bug fixes.
