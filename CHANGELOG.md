@@ -1,3 +1,72 @@
+# Release v2.1.2 - 2025-12-09
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- **Package Optimization**: Enhanced `.vscodeignore` to exclude development files, release scripts, documentation, publishing secrets, and other unnecessary files from extension packages, reducing package size and improving security
+
+---
+
+# Release v2.1.1 - 2025-12-09
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- **Automated Publishing**: Enhanced release script (`release.sh`) to automatically publish extensions to both VS Code Marketplace and Open VSX Registry after creating release tags
+- **Secure Token Management**: Added `.publish-secrets` file support for securely storing publishing tokens outside of version control
+- **Publishing Workflow**: Integrated publishing commands into release process with proper error handling and validation
+- **Documentation**: Added `.publish-secrets.sample` template file to guide users on setting up publishing credentials
+
+---
+
+# Release v2.0.3 - 2025-12-09
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## New Features
+- NA
+
+## Improvements
+- NA
+
+## Bug Fixes
+- NA
+
+## Deprecated Features
+- NA
+
+## Known Issues
+- NA
+
+## Acknowledgments
+- NA
+
+---
+
+# Release v2.0.2 - 2025-12-09
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## New Features
+- NA
+
+## Improvements
+- NA
+
+## Bug Fixes
+- NA
+
+## Deprecated Features
+- NA
+
+## Known Issues
+- NA
+
+## Acknowledgments
+- NA
+
+---
+
 # Release v2.0.1 - 2025-12-09
 
 ## Improvements
