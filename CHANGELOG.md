@@ -1,3 +1,10 @@
+# Release v2.0.1 - 2025-12-09
+
+## Improvements
+- **Author Contact Information**: Updated author email address in source code documentation across all modules for proper attribution and contact information
+
+---
+
 # Release v1.0.2A - 2025-12-08
 
 This release introduces below new features, performance improvements, and bug fixes.
