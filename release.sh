@@ -73,4 +73,41 @@ echo "Creating a tag: v$VERSION"
 git tag v$VERSION
 git push origin v$VERSION
 
+# Step 7: Publish to VS Code Marketplace and Open VSX Registry
+echo "Publishing extension to marketplaces..."
+
+# Load secrets from .publish-secrets file
+if [ -f ".publish-secrets" ]; then
+    echo "Loading publishing secrets..."
+    # Source the secrets file to load environment variables
+    set -a
+    source .publish-secrets
+    set +a
+    
+    # Check if tokens are loaded
+    if [ -z "$OVSX_PAT" ] || [ -z "$VSCE_PAT" ]; then
+        echo "Warning: Publishing tokens not found in .publish-secrets file."
+        echo "Skipping publishing. Please check .publish-secrets.sample for format."
+    else
+        # Publish to VS Code Marketplace
+        echo "Publishing to VS Code Marketplace..."
+        if vsce publish -p "$VSCE_PAT"; then
+            echo "✓ Successfully published to VS Code Marketplace"
+        else
+            echo "✗ Failed to publish to VS Code Marketplace"
+        fi
+        
+        # Publish to Open VSX Registry
+        echo "Publishing to Open VSX Registry..."
+        if ovsx publish -p "$OVSX_PAT"; then
+            echo "✓ Successfully published to Open VSX Registry"
+        else
+            echo "✗ Failed to publish to Open VSX Registry"
+        fi
+    fi
+else
+    echo "Warning: .publish-secrets file not found."
+    echo "Skipping publishing. Create .publish-secrets from .publish-secrets.sample and add your tokens."
+fi
+
 echo "Release process completed successfully."

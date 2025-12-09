@@ -41,3 +41,6 @@ coverage/
 *.tmp
 *.temp
 dev.md
+
+# Publishing secrets
+.publish-secrets
