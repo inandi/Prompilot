@@ -1,3 +1,12 @@
+# Release v2.1.2 - 2025-12-09
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- **Package Optimization**: Enhanced `.vscodeignore` to exclude development files, release scripts, documentation, publishing secrets, and other unnecessary files from extension packages, reducing package size and improving security
+
+---
+
 # Release v2.1.1 - 2025-12-09
 
 This release introduces below new features, performance improvements, and bug fixes.
