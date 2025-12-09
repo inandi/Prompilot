@@ -82,7 +82,7 @@ export class PromptForm {
         const shortName = await vscode.window.showInputBox({
             prompt: 'Enter Short Name (up to 25 characters)',
             value: existingPrompt?.shortName || '',
-            validateInput: (value) => {
+            validateInput: (value: string) => {
                 if (!value || value.trim().length === 0) {
                     return 'Short name is required';
                 }
@@ -101,7 +101,7 @@ export class PromptForm {
         const detailedInstruction = await vscode.window.showInputBox({
             prompt: 'Enter Detailed Instruction (full prompt text). You can paste multi-line text.',
             value: existingPrompt?.detailedInstruction || '',
-            validateInput: (value) => {
+            validateInput: (value: string) => {
                 if (!value || value.trim().length === 0) {
                     return 'Detailed instruction is required';
                 }
