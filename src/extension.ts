@@ -4,7 +4,7 @@
  * VS Code extension for managing custom AI instructions with a status bar button.
  * Provides functionality to create, edit, delete, and run prompts.
  * 
- * @author Gobinda Nandi <email@example.com>
+ * @author Gobinda Nandi <01ampoule_zero@icloud.com>
  * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  * @copyright © 2025 Gobinda Nandi. All rights reserved.

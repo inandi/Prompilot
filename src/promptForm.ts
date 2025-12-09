@@ -1,7 +1,7 @@
 /**
  * Prompt Form Module
  * 
- * @author Gobinda Nandi <email@example.com>
+ * @author Gobinda Nandi <01ampoule_zero@icloud.com>
  * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  * @copyright © 2025 Gobinda Nandi. All rights reserved.
@@ -16,7 +16,7 @@ import { Prompt, PromptManager } from './promptManager';
  * Handles the UI forms for adding and editing prompts.
  * Manages user input validation and prompt creation/editing workflow.
  * 
- * @author Gobinda Nandi <email@example.com>
+ * @author Gobinda Nandi <01ampoule_zero@icloud.com>
  * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  * @copyright © 2025 Gobinda Nandi. All rights reserved.
