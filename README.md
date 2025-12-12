@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Prompilot [Beta]</h1>
-  <p><strong>Your AI Prompt Assistant for VS Code</strong></p>
+  <p><strong>Your Prompt Assistant for VS Code</strong></p>
 </div>
 
 Tired of retyping the same AI prompts over and over? Prompilot makes it effortless to save, organize, and reuse your favorite AI instructions with just one click!
