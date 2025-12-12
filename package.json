@@ -1,6 +1,6 @@
 {
-  "name": "prompilot-dev",
-  "displayName": "Prompilot Dev",
+  "name": "prompilot",
+  "displayName": "Prompilot",
   "description": "Manage custom instructions with a status bar button",
   "version": "3.0.0",
   "publisher": "iNandi",
@@ -22,7 +22,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "prompilot-dev.showPrompts",
+        "command": "prompilot.showPrompts",
         "title": "Show Prompts"
       }
     ]
