@@ -1,8 +1,8 @@
 {
   "name": "prompilot",
   "displayName": "Prompilot",
-  "description": "Manage custom AI instructions with a status bar button",
-  "version": "2.1.2",
+  "description": "Manage custom instructions with a status bar button",
+  "version": "3.0.0",
   "publisher": "iNandi",
   "icon": "media/logo.png",
   "repository": {

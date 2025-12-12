@@ -1,13 +1,13 @@
 /**
  * Prompilot Extension Main Module
  * 
- * VS Code extension for managing custom AI instructions with a status bar button.
+ * VS Code extension for managing custom instructions with a status bar button.
  * Provides functionality to create, edit, delete, and run prompts.
  * 
  * @author Gobinda Nandi <01ampoule_zero@icloud.com>
  * @since 0.0.1 [06-12-2025]
- * @version 0.0.1
- * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ * @version 3.0.0
+ * @copyright (c) 2025 Gobinda Nandi
  */
 
 import * as vscode from 'vscode';
@@ -24,7 +24,6 @@ let promptForm: PromptForm;
  * 
  * @param {vscode.ExtensionContext} context - The VS Code extension context
  * @returns {void}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 export function activate(context: vscode.ExtensionContext) {
@@ -35,7 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
     // Create status bar item
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBarItem.text = '$(comment-discussion) Prompilot';
-    statusBarItem.tooltip = 'Manage AI prompts';
+    statusBarItem.tooltip = 'Manage prompts';
     statusBarItem.command = 'prompilot.showPrompts';
     statusBarItem.show();
 
@@ -61,13 +60,10 @@ export function activate(context: vscode.ExtensionContext) {
  * Loads all prompts on startup.
  * 
  * @returns {void}
- * @since 0.0.1 [06-12-2025]
- * @version 0.0.1
+ * @version 3.0.0
  */
 function loadPrompts(): void {
-    const prompts = promptManager.getAllPrompts();
-    // Prompts are loaded and ready to use
-    console.log(`Loaded ${prompts.length} prompt(s)`);
+    promptManager.getAllPrompts();
 }
 
 /**
@@ -75,7 +71,6 @@ function loadPrompts(): void {
  * Displays prompts alphabetically with "Add New" option and "Manage" group.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showPromptsMenu(): Promise<void> {
@@ -90,7 +85,7 @@ async function showPromptsMenu(): Promise<void> {
     });
 
     // Sort prompts alphabetically by shortName
-    const sortedPrompts = [...prompts].sort((a, b) => 
+    const sortedPrompts = [...prompts].sort((a, b) =>
         a.shortName.localeCompare(b.shortName, undefined, { sensitivity: 'base' })
     );
 
@@ -118,7 +113,7 @@ async function showPromptsMenu(): Promise<void> {
 
     quickPick.items = items;
     quickPick.placeholder = 'Select a prompt to run, or add a new one';
-    
+
     quickPick.onDidAccept(async () => {
         const selected = quickPick.selectedItems[0];
         if (!selected) {
@@ -150,7 +145,6 @@ async function showPromptsMenu(): Promise<void> {
  * Shows the management menu with options to edit or delete prompts.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showManageMenu(): Promise<void> {
@@ -184,12 +178,11 @@ async function showManageMenu(): Promise<void> {
  * Shows a selector to choose which prompt to edit.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showEditPromptSelector(): Promise<void> {
     const prompts = promptManager.getAllPrompts();
-    const sortedPrompts = [...prompts].sort((a, b) => 
+    const sortedPrompts = [...prompts].sort((a, b) =>
         a.shortName.localeCompare(b.shortName, undefined, { sensitivity: 'base' })
     );
 
@@ -211,12 +204,11 @@ async function showEditPromptSelector(): Promise<void> {
  * Shows a selector to choose which prompt to delete.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showDeletePromptSelector(): Promise<void> {
     const prompts = promptManager.getAllPrompts();
-    const sortedPrompts = [...prompts].sort((a, b) => 
+    const sortedPrompts = [...prompts].sort((a, b) =>
         a.shortName.localeCompare(b.shortName, undefined, { sensitivity: 'base' })
     );
 
@@ -239,8 +231,7 @@ async function showDeletePromptSelector(): Promise<void> {
  * 
  * @param {string} shortName - The short name of the prompt to run
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
- * @version 0.0.1
+ * @version 3.0.0
  */
 async function runPrompt(shortName: string): Promise<void> {
     const prompt = promptManager.getPrompt(shortName);
@@ -251,9 +242,9 @@ async function runPrompt(shortName: string): Promise<void> {
 
     // Copy prompt to clipboard
     await vscode.env.clipboard.writeText(prompt.detailedInstruction);
-    
+
     // Show notification to user
-    vscode.window.showInformationMessage(`Prompt "${shortName}" copied to clipboard. Paste (Cmd+V / Ctrl+V) it into the AI chat input.`);
+    vscode.window.showInformationMessage(`Prompt "${shortName}" copied to clipboard. Paste it.`);
 }
 
 /**
@@ -261,15 +252,13 @@ async function runPrompt(shortName: string): Promise<void> {
  * 
  * @param {string} shortName - The short name of the prompt to delete
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
- * @version 0.0.1
+ * @version 3.0.0
  */
 async function deletePrompt(shortName: string): Promise<void> {
     const result = await vscode.window.showWarningMessage(
         `Are you sure you want to delete the prompt "${shortName}"?`,
         { modal: true },
-        'Delete',
-        'Cancel'
+        'Delete'
     );
 
     if (result === 'Delete') {
@@ -287,7 +276,6 @@ async function deletePrompt(shortName: string): Promise<void> {
  * Cleans up resources when the extension is deactivated.
  * 
  * @returns {void}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 export function deactivate() {
