@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
     // Create status bar item
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBarItem.text = '$(comment-discussion) Prompilot';
-    statusBarItem.tooltip = 'Manage AI prompts';
+    statusBarItem.tooltip = 'Manage prompts';
     statusBarItem.command = 'prompilot.showPrompts';
     statusBarItem.show();
 
