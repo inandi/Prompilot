@@ -3,7 +3,7 @@
   <p><strong>Your Prompt Assistant for VS Code</strong></p>
 </div>
 
-Tired of retyping the same AI prompts over and over? Prompilot makes it effortless to save, organize, and reuse your favorite AI instructions with just one click!
+Tired of retyping the same prompts over and over? Prompilot makes it effortless to save, organize, and reuse your favorite AI instructions with just one click!
 
 ## What is Prompilot?
 
