@@ -19,23 +19,20 @@ import { Prompt, PromptManager } from './promptManager';
  * @author Gobinda Nandi <01ampoule_zero@icloud.com>
  * @since 0.0.1 [06-12-2025]
  * @version 3.0.0
- * @copyright (c) 2025 Gobinda Nandi
  */
 export class PromptForm {
     /**
      * Creates an instance of PromptForm.
      * 
      * @param {PromptManager} promptManager - The prompt manager instance
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
-    constructor(private promptManager: PromptManager) {}
+    constructor(private promptManager: PromptManager) { }
 
     /**
      * Shows the form to add a new prompt.
      * 
      * @returns {Promise<void>}
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     async showAddForm(): Promise<void> {
@@ -51,7 +48,6 @@ export class PromptForm {
      * 
      * @param {string} shortName - The short name of the prompt to edit
      * @returns {Promise<void>}
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     async showEditForm(shortName: string): Promise<void> {
@@ -74,7 +70,6 @@ export class PromptForm {
      * @private
      * @param {Prompt} [existingPrompt] - Optional existing prompt for editing
      * @returns {Promise<Prompt | undefined>} The prompt object if form is completed, undefined if cancelled
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     private async showForm(existingPrompt?: Prompt): Promise<Prompt | undefined> {

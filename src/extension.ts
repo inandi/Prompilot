@@ -24,7 +24,6 @@ let promptForm: PromptForm;
  * 
  * @param {vscode.ExtensionContext} context - The VS Code extension context
  * @returns {void}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 export function activate(context: vscode.ExtensionContext) {
@@ -61,7 +60,6 @@ export function activate(context: vscode.ExtensionContext) {
  * Loads all prompts on startup.
  * 
  * @returns {void}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 function loadPrompts(): void {
@@ -75,7 +73,6 @@ function loadPrompts(): void {
  * Displays prompts alphabetically with "Add New" option and "Manage" group.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showPromptsMenu(): Promise<void> {
@@ -90,7 +87,7 @@ async function showPromptsMenu(): Promise<void> {
     });
 
     // Sort prompts alphabetically by shortName
-    const sortedPrompts = [...prompts].sort((a, b) => 
+    const sortedPrompts = [...prompts].sort((a, b) =>
         a.shortName.localeCompare(b.shortName, undefined, { sensitivity: 'base' })
     );
 
@@ -118,7 +115,7 @@ async function showPromptsMenu(): Promise<void> {
 
     quickPick.items = items;
     quickPick.placeholder = 'Select a prompt to run, or add a new one';
-    
+
     quickPick.onDidAccept(async () => {
         const selected = quickPick.selectedItems[0];
         if (!selected) {
@@ -150,7 +147,6 @@ async function showPromptsMenu(): Promise<void> {
  * Shows the management menu with options to edit or delete prompts.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showManageMenu(): Promise<void> {
@@ -184,12 +180,11 @@ async function showManageMenu(): Promise<void> {
  * Shows a selector to choose which prompt to edit.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showEditPromptSelector(): Promise<void> {
     const prompts = promptManager.getAllPrompts();
-    const sortedPrompts = [...prompts].sort((a, b) => 
+    const sortedPrompts = [...prompts].sort((a, b) =>
         a.shortName.localeCompare(b.shortName, undefined, { sensitivity: 'base' })
     );
 
@@ -211,12 +206,11 @@ async function showEditPromptSelector(): Promise<void> {
  * Shows a selector to choose which prompt to delete.
  * 
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function showDeletePromptSelector(): Promise<void> {
     const prompts = promptManager.getAllPrompts();
-    const sortedPrompts = [...prompts].sort((a, b) => 
+    const sortedPrompts = [...prompts].sort((a, b) =>
         a.shortName.localeCompare(b.shortName, undefined, { sensitivity: 'base' })
     );
 
@@ -239,7 +233,6 @@ async function showDeletePromptSelector(): Promise<void> {
  * 
  * @param {string} shortName - The short name of the prompt to run
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function runPrompt(shortName: string): Promise<void> {
@@ -251,7 +244,7 @@ async function runPrompt(shortName: string): Promise<void> {
 
     // Copy prompt to clipboard
     await vscode.env.clipboard.writeText(prompt.detailedInstruction);
-    
+
     // Show notification to user
     vscode.window.showInformationMessage(`Prompt "${shortName}" copied to clipboard. Paste (Cmd+V / Ctrl+V) it into the AI chat input.`);
 }
@@ -261,7 +254,6 @@ async function runPrompt(shortName: string): Promise<void> {
  * 
  * @param {string} shortName - The short name of the prompt to delete
  * @returns {Promise<void>}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 async function deletePrompt(shortName: string): Promise<void> {
@@ -287,7 +279,6 @@ async function deletePrompt(shortName: string): Promise<void> {
  * Cleans up resources when the extension is deactivated.
  * 
  * @returns {void}
- * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */
 export function deactivate() {

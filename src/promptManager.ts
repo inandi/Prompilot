@@ -37,7 +37,6 @@ export interface Prompt {
  * @author Gobinda Nandi <01ampoule_zero@icloud.com>
  * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
- * @copyright (c) 2025 Gobinda Nandi
  */
 export class PromptManager {
     private globalPromptsPath: string;
@@ -47,7 +46,6 @@ export class PromptManager {
      * Creates an instance of PromptManager.
      * 
      * @param {vscode.ExtensionContext} context - The VS Code extension context
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     constructor(private context: vscode.ExtensionContext) {
@@ -68,7 +66,6 @@ export class PromptManager {
      * 
      * @private
      * @returns {void}
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     private updateProjectPath(): void {
@@ -90,7 +87,6 @@ export class PromptManager {
      * Called when workspace folders change.
      * 
      * @returns {void}
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     refreshProjectPath(): void {
@@ -103,7 +99,6 @@ export class PromptManager {
      * @private
      * @param {string} filePath - The path to the JSON file
      * @returns {Prompt[]} Array of prompts read from the file, or empty array on error
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     private readPrompts(filePath: string): Prompt[] {
@@ -125,7 +120,6 @@ export class PromptManager {
      * @param {string} filePath - The path to the JSON file
      * @param {Prompt[]} prompts - Array of prompts to write
      * @returns {void}
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     private writePrompts(filePath: string, prompts: Prompt[]): void {
@@ -142,7 +136,6 @@ export class PromptManager {
      * Project-specific prompts take precedence over global prompts with the same name.
      * 
      * @returns {Prompt[]} Array of all prompts with project-specific taking precedence
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     getAllPrompts(): Prompt[] {
@@ -169,7 +162,6 @@ export class PromptManager {
      * Gets all global prompts.
      * 
      * @returns {Prompt[]} Array of global prompts
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     getGlobalPrompts(): Prompt[] {
@@ -180,7 +172,6 @@ export class PromptManager {
      * Gets all project-specific prompts for the current workspace.
      * 
      * @returns {Prompt[]} Array of project-specific prompts, or empty array if no workspace
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     getProjectPrompts(): Prompt[] {
@@ -198,7 +189,6 @@ export class PromptManager {
      * @param {boolean} [isEdit=false] - Whether this is an edit operation
      * @param {Prompt} [oldPrompt] - The original prompt when editing
      * @returns {void}
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     savePrompt(prompt: Prompt, isEdit: boolean = false, oldPrompt?: Prompt): void {
@@ -220,11 +210,11 @@ export class PromptManager {
         // Save to new location with duplicate checking at the appropriate scope level
         if (prompt.scope === 'Global') {
             let prompts = this.getGlobalPrompts();
-            
+
             // Check for duplicate at global level (excluding the prompt being edited if name unchanged)
             const isNameChange = isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName;
             const isScopeChange = isEdit && oldPrompt && oldPrompt.scope !== prompt.scope;
-            
+
             if (isEdit && !isNameChange && !isScopeChange) {
                 // Editing same prompt without name or scope change - no duplicate check needed
             } else {
@@ -235,18 +225,18 @@ export class PromptManager {
                     }
                     return p.shortName === prompt.shortName;
                 });
-                
+
                 if (duplicateExists) {
                     vscode.window.showErrorMessage(`A global prompt with the name "${prompt.shortName}" already exists. Please choose a different name.`);
                     return;
                 }
             }
-            
+
             // Remove old name if it changed (already handled above, but keep for safety)
             if (isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName) {
                 prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
             }
-            
+
             prompts.push(prompt);
             this.writePrompts(this.globalPromptsPath, prompts);
         } else {
@@ -255,13 +245,13 @@ export class PromptManager {
                 vscode.window.showErrorMessage('No workspace folder found. Cannot save project-specific prompt.');
                 return;
             }
-            
+
             let prompts = this.getProjectPrompts();
-            
+
             // Check for duplicate at project level (excluding the prompt being edited if name unchanged)
             const isNameChange = isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName;
             const isScopeChange = isEdit && oldPrompt && oldPrompt.scope !== prompt.scope;
-            
+
             if (isEdit && !isNameChange && !isScopeChange) {
                 // Editing same prompt without name or scope change - no duplicate check needed
             } else {
@@ -272,18 +262,18 @@ export class PromptManager {
                     }
                     return p.shortName === prompt.shortName;
                 });
-                
+
                 if (duplicateExists) {
                     vscode.window.showErrorMessage(`A project-specific prompt with the name "${prompt.shortName}" already exists in this workspace. Please choose a different name.`);
                     return;
                 }
             }
-            
+
             // Remove old name if it changed (already handled above, but keep for safety)
             if (isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName) {
                 prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
             }
-            
+
             prompts.push(prompt);
             this.writePrompts(this.projectPromptsPath, prompts);
         }
@@ -295,13 +285,12 @@ export class PromptManager {
      * 
      * @param {string} shortName - The short name of the prompt to delete
      * @returns {boolean} True if the prompt was deleted, false if not found
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     deletePrompt(shortName: string): boolean {
         const allPrompts = this.getAllPrompts();
         const prompt = allPrompts.find(p => p.shortName === shortName);
-        
+
         if (!prompt) {
             return false;
         }
@@ -328,7 +317,6 @@ export class PromptManager {
      * 
      * @param {string} shortName - The short name of the prompt to find
      * @returns {Prompt | undefined} The prompt if found, undefined otherwise
-     * @since 0.0.1 [06-12-2025]
      * @version 0.0.1
      */
     getPrompt(shortName: string): Prompt | undefined {
