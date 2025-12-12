@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Prompilot</h1>
+  <h1>Prompilot [Beta]</h1>
   <p><strong>Your Prompt Assistant</strong></p>
 </div>
 
