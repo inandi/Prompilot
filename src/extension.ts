@@ -1,7 +1,7 @@
 /**
  * Prompilot Extension Main Module
  * 
- * VS Code extension for managing custom AI instructions with a status bar button.
+ * VS Code extension for managing custom instructions with a status bar button.
  * Provides functionality to create, edit, delete, and run prompts.
  * 
  * @author Gobinda Nandi <01ampoule_zero@icloud.com>
@@ -60,12 +60,10 @@ export function activate(context: vscode.ExtensionContext) {
  * Loads all prompts on startup.
  * 
  * @returns {void}
- * @version 0.0.1
+ * @version 3.0.0
  */
 function loadPrompts(): void {
-    const prompts = promptManager.getAllPrompts();
-    // Prompts are loaded and ready to use
-    console.log(`Loaded ${prompts.length} prompt(s)`);
+    promptManager.getAllPrompts();
 }
 
 /**
@@ -233,7 +231,7 @@ async function showDeletePromptSelector(): Promise<void> {
  * 
  * @param {string} shortName - The short name of the prompt to run
  * @returns {Promise<void>}
- * @version 0.0.1
+ * @version 3.0.0
  */
 async function runPrompt(shortName: string): Promise<void> {
     const prompt = promptManager.getPrompt(shortName);
@@ -246,7 +244,7 @@ async function runPrompt(shortName: string): Promise<void> {
     await vscode.env.clipboard.writeText(prompt.detailedInstruction);
 
     // Show notification to user
-    vscode.window.showInformationMessage(`Prompt "${shortName}" copied to clipboard. Paste (Cmd+V / Ctrl+V) it into the AI chat input.`);
+    vscode.window.showInformationMessage(`Prompt "${shortName}" copied to clipboard. Paste it.`);
 }
 
 /**
@@ -254,14 +252,13 @@ async function runPrompt(shortName: string): Promise<void> {
  * 
  * @param {string} shortName - The short name of the prompt to delete
  * @returns {Promise<void>}
- * @version 0.0.1
+ * @version 3.0.0
  */
 async function deletePrompt(shortName: string): Promise<void> {
     const result = await vscode.window.showWarningMessage(
         `Are you sure you want to delete the prompt "${shortName}"?`,
         { modal: true },
-        'Delete',
-        'Cancel'
+        'Delete'
     );
 
     if (result === 'Delete') {

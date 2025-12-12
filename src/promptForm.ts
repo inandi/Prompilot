@@ -39,7 +39,6 @@ export class PromptForm {
         const prompt = await this.showForm();
         if (prompt) {
             this.promptManager.savePrompt(prompt);
-            vscode.window.showInformationMessage(`Prompt "${prompt.shortName}" saved successfully.`);
         }
     }
 
@@ -60,7 +59,6 @@ export class PromptForm {
         const prompt = await this.showForm(existingPrompt);
         if (prompt) {
             this.promptManager.savePrompt(prompt, true, existingPrompt);
-            vscode.window.showInformationMessage(`Prompt "${prompt.shortName}" updated successfully.`);
         }
     }
 

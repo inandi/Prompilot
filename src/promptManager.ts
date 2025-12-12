@@ -189,94 +189,57 @@ export class PromptManager {
      * @param {boolean} [isEdit=false] - Whether this is an edit operation
      * @param {Prompt} [oldPrompt] - The original prompt when editing
      * @returns {void}
-     * @version 0.0.1
+     * @version 3.0.0
      */
     savePrompt(prompt: Prompt, isEdit: boolean = false, oldPrompt?: Prompt): void {
-        // If editing, remove from old location (handles scope changes)
+        // Validate project scope has workspace
+        if (prompt.scope === 'Project-specific' && !this.projectPromptsPath) {
+            vscode.window.showErrorMessage('No workspace folder found. Cannot save project-specific prompt.');
+            return;
+        }
+
+        // Check for duplicates BEFORE any modifications (prevents data loss)
+        const targetPrompts = prompt.scope === 'Global' 
+            ? this.getGlobalPrompts() 
+            : this.getProjectPrompts();
+
+        const duplicateExists = targetPrompts.some(p => {
+            // If editing in the same scope, exclude the old prompt from duplicate check
+            if (isEdit && oldPrompt && oldPrompt.scope === prompt.scope && p.shortName === oldPrompt.shortName) {
+                return false;
+            }
+            return p.shortName === prompt.shortName;
+        });
+
+        if (duplicateExists) {
+            const scopeLabel = prompt.scope === 'Global' ? 'global' : 'project-specific';
+            vscode.window.showErrorMessage(`A ${scopeLabel} prompt with the name "${prompt.shortName}" already exists. Please choose a different name.`);
+            return;
+        }
+
+        // Remove old prompt from its original location (only after duplicate check passes)
         if (isEdit && oldPrompt) {
             if (oldPrompt.scope === 'Global') {
-                let prompts = this.getGlobalPrompts();
-                prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
-                this.writePrompts(this.globalPromptsPath, prompts);
-            } else {
-                if (this.projectPromptsPath) {
-                    let prompts = this.getProjectPrompts();
-                    prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
-                    this.writePrompts(this.projectPromptsPath, prompts);
-                }
+                const globalPrompts = this.getGlobalPrompts().filter(p => p.shortName !== oldPrompt.shortName);
+                this.writePrompts(this.globalPromptsPath, globalPrompts);
+            } else if (this.projectPromptsPath) {
+                const projectPrompts = this.getProjectPrompts().filter(p => p.shortName !== oldPrompt.shortName);
+                this.writePrompts(this.projectPromptsPath, projectPrompts);
             }
         }
 
-        // Save to new location with duplicate checking at the appropriate scope level
-        if (prompt.scope === 'Global') {
-            let prompts = this.getGlobalPrompts();
-
-            // Check for duplicate at global level (excluding the prompt being edited if name unchanged)
-            const isNameChange = isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName;
-            const isScopeChange = isEdit && oldPrompt && oldPrompt.scope !== prompt.scope;
-
-            if (isEdit && !isNameChange && !isScopeChange) {
-                // Editing same prompt without name or scope change - no duplicate check needed
-            } else {
-                // Check for duplicate: exclude the old prompt if editing
-                const duplicateExists = prompts.some(p => {
-                    if (isEdit && oldPrompt && p.shortName === oldPrompt.shortName) {
-                        return false; // Exclude the prompt being edited
-                    }
-                    return p.shortName === prompt.shortName;
-                });
-
-                if (duplicateExists) {
-                    vscode.window.showErrorMessage(`A global prompt with the name "${prompt.shortName}" already exists. Please choose a different name.`);
-                    return;
-                }
-            }
-
-            // Remove old name if it changed (already handled above, but keep for safety)
-            if (isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName) {
-                prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
-            }
-
-            prompts.push(prompt);
-            this.writePrompts(this.globalPromptsPath, prompts);
-        } else {
-            // Project-specific scope
-            if (!this.projectPromptsPath) {
-                vscode.window.showErrorMessage('No workspace folder found. Cannot save project-specific prompt.');
-                return;
-            }
-
-            let prompts = this.getProjectPrompts();
-
-            // Check for duplicate at project level (excluding the prompt being edited if name unchanged)
-            const isNameChange = isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName;
-            const isScopeChange = isEdit && oldPrompt && oldPrompt.scope !== prompt.scope;
-
-            if (isEdit && !isNameChange && !isScopeChange) {
-                // Editing same prompt without name or scope change - no duplicate check needed
-            } else {
-                // Check for duplicate: exclude the old prompt if editing
-                const duplicateExists = prompts.some(p => {
-                    if (isEdit && oldPrompt && p.shortName === oldPrompt.shortName) {
-                        return false; // Exclude the prompt being edited
-                    }
-                    return p.shortName === prompt.shortName;
-                });
-
-                if (duplicateExists) {
-                    vscode.window.showErrorMessage(`A project-specific prompt with the name "${prompt.shortName}" already exists in this workspace. Please choose a different name.`);
-                    return;
-                }
-            }
-
-            // Remove old name if it changed (already handled above, but keep for safety)
-            if (isEdit && oldPrompt && oldPrompt.shortName !== prompt.shortName) {
-                prompts = prompts.filter(p => p.shortName !== oldPrompt.shortName);
-            }
-
-            prompts.push(prompt);
-            this.writePrompts(this.projectPromptsPath, prompts);
-        }
+        // Add new prompt to target location
+        // Re-read to get fresh state after potential removal
+        const updatedPrompts = prompt.scope === 'Global' 
+            ? this.getGlobalPrompts() 
+            : this.getProjectPrompts();
+        
+        updatedPrompts.push(prompt);
+        
+        const targetPath = prompt.scope === 'Global' ? this.globalPromptsPath : this.projectPromptsPath;
+        this.writePrompts(targetPath, updatedPrompts);
+        
+        vscode.window.showInformationMessage(`Prompt saved successfully.`);
     }
 
     /**
