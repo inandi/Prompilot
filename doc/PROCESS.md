@@ -13,6 +13,10 @@ Before you begin, ensure you have the following installed:
   ```bash
   npm install -g @vscode/vsce
   ```
+- **ovsx** (Open VSX CLI) - Install globally with:
+  ```bash
+  npm install -g ovsx
+  ```
 
 ## Development Setup
 
@@ -123,49 +127,62 @@ ls -la out/
 
 3. **Update `README.md`** if needed (version references, new features, etc.)
 
-#### Step 2: Run Release Script
+#### Step 2: Set Up Publishing Secrets (One-time)
+
+Before running the release script, you need to set up your publishing tokens:
+
+1. **Create `.publish-secrets` file**:
+   ```bash
+   cp .publish-secrets.sample .publish-secrets
+   ```
+
+2. **Add your tokens** to `.publish-secrets`:
+   - Get your VS Code Marketplace Personal Access Token from [Azure DevOps](https://dev.azure.com)
+   - Get your Open VSX Personal Access Token from [Open VSX](https://open-vsx.org/user-settings/namespaces)
+   - Update the `.publish-secrets` file with your tokens:
+     ```
+     OVSX_PAT=your_openvsx_token_here
+     VSCE_PAT=your_vsce_token_here
+     ```
+
+3. **Verify `.publish-secrets` is in `.gitignore`** (it should be already)
+
+#### Step 3: Run Release Script
 
 ```bash
 # Run the release script with the new version number
-./release.sh 0.0.2
+./release.sh 3.0.0
 ```
 
-This script will:
+This script will automatically:
 - Update `version.md` with version information
 - Copy `release.md` content to `CHANGELOG.md`
 - Reset `release.md` from `release.md.sample`
 - Commit changes and push to git
+- Create and push a git tag
+- **Automatically publish to both VS Code Marketplace and Open VSX Registry** (if `.publish-secrets` is configured)
 
-#### Step 3: Create Git Tag (Optional but Recommended)
+> **Note**: The release script now handles publishing automatically. If you prefer manual publishing, you can skip the automatic publishing by commenting out the publishing section in `release.sh`.
 
+#### Step 4: Manual Publishing (Alternative)
+
+If you prefer to publish manually or the automatic publishing failed:
+
+**Publish to VS Code Marketplace:**
 ```bash
-# Create a tag for the release
-git tag v0.0.2
-git push origin v0.0.2
+vsce publish -p <your-vsce-token>
 ```
 
-#### Step 4: Publish to Marketplace
-
-**Option A: Publish with version number**
+**Publish to Open VSX Registry:**
 ```bash
-vsce publish 0.0.2
+ovsx publish -p <your-openvsx-token>
 ```
 
-**Option B: Auto-increment version**
+Or use the tokens from `.publish-secrets`:
 ```bash
-# Patch version (0.0.1 -> 0.0.2)
-vsce publish patch
-
-# Minor version (0.0.1 -> 0.1.0)
-vsce publish minor
-
-# Major version (0.0.1 -> 1.0.0)
-vsce publish major
-```
-
-**Option C: Publish without version (uses package.json version)**
-```bash
-vsce publish
+source .publish-secrets
+vsce publish -p "$VSCE_PAT"
+ovsx publish -p "$OVSX_PAT"
 ```
 
 ### Publishing Checklist
@@ -195,8 +212,8 @@ Follow [Semantic Versioning](https://semver.org/):
 ### Updating Version
 
 1. Update version in `package.json`
-2. Run `./release.sh <version>`
-3. Publish with `vsce publish <version>`
+2. Update `release.md` with release notes
+3. Run `./release.sh <version>` (this will automatically publish to both marketplaces)
 
 ## Troubleshooting
 
@@ -217,19 +234,27 @@ Follow [Semantic Versioning](https://semver.org/):
 **Issue: Missing files in package**
 - Solution: Check `.vscodeignore` file to ensure important files aren't excluded
 
+**Issue: Publishing fails during release script**
+- Solution: Check that `.publish-secrets` file exists and contains valid tokens
+- Verify tokens are correct and have proper permissions
+- Check that both `vsce` and `ovsx` CLI tools are installed globally
+
 ## File Structure Reference
 
 ```
 Prompilot/
-├── src/              # TypeScript source files
-├── out/              # Compiled JavaScript files (generated)
-├── doc/              # Documentation
-├── package.json      # Extension manifest
-├── tsconfig.json     # TypeScript configuration
-├── release.sh        # Release automation script
-├── release.md        # Current release notes
-├── CHANGELOG.md      # Full changelog
-└── version.md        # Version history
+├── src/                    # TypeScript source files
+├── out/                    # Compiled JavaScript files (generated)
+├── doc/                    # Documentation
+├── package.json            # Extension manifest
+├── tsconfig.json           # TypeScript configuration
+├── release.sh              # Release automation script (includes auto-publishing)
+├── release.md              # Current release notes
+├── release.md.sample       # Release notes template
+├── CHANGELOG.md            # Full changelog
+├── version.md              # Version history
+├── .publish-secrets        # Publishing tokens (not in git)
+└── .publish-secrets.sample # Publishing tokens template
 ```
 
 ## Additional Resources
@@ -251,10 +276,7 @@ npm run watch            # Build and watch for changes
 F5                       # Launch Extension Development Host
 
 # Publishing
-./release.sh 0.0.2       # Prepare release
-vsce publish 0.0.2       # Publish to marketplace
-git tag v0.0.2           # Create git tag
-git push origin v0.0.2   # Push tag to remote
+./release.sh 3.0.0       # Prepare release, create tag, and publish to both marketplaces
 ```
 
 ---
