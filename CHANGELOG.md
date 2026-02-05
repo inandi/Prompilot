@@ -1,3 +1,28 @@
+# Release v3.0.1 - 2026-02-05
+
+## Improvements
+- **Major Version Release (3.0.0)**: Comprehensive code refactoring and enhancement of prompt saving logic across extension, prompt form, and prompt manager modules
+- **Code Quality**: Removed outdated `@since` annotations and cleaned up whitespace in source files for better maintainability
+- **User Experience**: Simplified prompt descriptions and improved README clarity by removing "AI" references and updating installation instructions
+- **Branding**: Removed "[Beta]" tag from README title for a cleaner, production-ready presentation
+- **Package Optimization**: Streamlined `.vscodeignore` configuration by removing CHANGELOG.md from ignored files
+- **Documentation**: Updated technical and process documentation to reflect automated publishing workflow and current version
+- **Release Notes**: Cleaned up release notes format by removing introductory text for a more concise presentation
+
+---
+
+# Release v3.0.0 - 2025-12-12
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- **Code Refactoring**: Simplified and enhanced prompt saving logic in extension, prompt form, and prompt manager for better maintainability
+- **Documentation Cleanup**: Removed outdated annotations and cleaned up code documentation for better clarity
+- **User Experience**: Simplified prompt descriptions and updated README to reflect beta status
+- **Package Updates**: Updated package description and metadata for consistency
+
+---
+
 # Release v2.1.2 - 2025-12-09
 
 This release introduces below new features, performance improvements, and bug fixes.
@@ -18,55 +43,7 @@ This release introduces below new features, performance improvements, and bug fi
 - **Documentation**: Added `.publish-secrets.sample` template file to guide users on setting up publishing credentials
 
 ---
-
-# Release v2.0.3 - 2025-12-09
-
-This release introduces below new features, performance improvements, and bug fixes.
-
-## New Features
-- NA
-
-## Improvements
-- NA
-
-## Bug Fixes
-- NA
-
-## Deprecated Features
-- NA
-
-## Known Issues
-- NA
-
-## Acknowledgments
-- NA
-
----
-
-# Release v2.0.2 - 2025-12-09
-
-This release introduces below new features, performance improvements, and bug fixes.
-
-## New Features
-- NA
-
-## Improvements
-- NA
-
-## Bug Fixes
-- NA
-
-## Deprecated Features
-- NA
-
-## Known Issues
-- NA
-
-## Acknowledgments
-- NA
-
----
-
+ 
 # Release v2.0.1 - 2025-12-09
 
 ## Improvements
@@ -108,6 +85,7 @@ This release introduces below new features, performance improvements, and bug fi
 - **Command Update**: Command identifier updated from `promptpilot.showPrompts` to `prompilot.showPrompts`
 - **Storage File Names**: Prompt storage files renamed from `PromptPilot.json` to `Prompilot.json` (both global and project-specific)
 - **Documentation Updates**: All documentation updated to reflect the new branding across README, technical docs, and process documentation
+
 ---
 
 # Release v0.0.2 - 2025-12-07
@@ -123,6 +101,3 @@ This release introduces below new features, performance improvements, and bug fi
 - **Multi-line Support**: Full support for complex, multi-line prompt instructions
 - **Quick Access Menu**: Fast access to all prompts through a QuickPick menu interface
 - **Prompt Validation**: Built-in validation for prompt names (max 25 characters) and duplicate checking
-
----
-

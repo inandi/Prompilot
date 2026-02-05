@@ -1,5 +1,3 @@
-This release introduces below new features, performance improvements, and bug fixes.
-
 ## New Features
 - NA
 

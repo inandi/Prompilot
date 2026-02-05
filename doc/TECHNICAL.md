@@ -2,7 +2,7 @@
 
 ## Overview
 
-Prompilot is a VS Code extension built with TypeScript that provides a user-friendly interface for managing AI prompts. The extension stores prompts in JSON format and supports both global and project-specific scopes.
+Prompilot is a VS Code extension built with TypeScript that provides a user-friendly interface for managing custom instructions/prompts. The extension stores prompts in JSON format and supports both global and project-specific scopes.
 
 ## Architecture
 
@@ -369,28 +369,48 @@ Before publishing any version, ensure:
 
 ### Publishing to Both Marketplaces
 
-To publish to both marketplaces, follow these steps:
+The release script (`release.sh`) now automatically publishes to both marketplaces. To publish to both:
 
-1. **Prepare the release** (update version, release notes, etc.):
+1. **Set up publishing secrets** (one-time setup):
+   - Copy `.publish-secrets.sample` to `.publish-secrets`
+   - Add your tokens to `.publish-secrets`:
+     ```
+     OVSX_PAT=your_openvsx_token_here
+     VSCE_PAT=your_vsce_token_here
+     ```
+
+2. **Run the release script**:
    ```bash
-   ./release.sh 1.0.3
+   ./release.sh 3.0.0
    ```
 
-2. **Publish to VS Code Marketplace**:
-   ```bash
-   vsce publish 1.0.3
-   ```
+   This will automatically:
+   - Update version information
+   - Create release commit and tag
+   - **Publish to VS Code Marketplace**
+   - **Publish to Open VSX Registry**
 
-3. **Publish to Open VSX Registry**:
-   ```bash
-   ovsx publish -p <your-openvsx-token>
-   ```
+**Manual Publishing (Alternative)**:
+
+If you prefer manual publishing or the automatic publishing failed:
+
+```bash
+# Load tokens from .publish-secrets
+source .publish-secrets
+
+# Publish to VS Code Marketplace
+vsce publish -p "$VSCE_PAT"
+
+# Publish to Open VSX Registry
+ovsx publish -p "$OVSX_PAT"
+```
 
 **Important Notes**:
 - Both marketplaces use the same version from `package.json`
 - Ensure the version number is incremented before publishing to either marketplace
 - It's recommended to publish to both marketplaces to reach the widest audience
 - Open VSX is particularly important for VSCodium users and other open-source editors
+- The `.publish-secrets` file is excluded from git for security
 
 ### Version Management
 
@@ -403,7 +423,7 @@ Follow [Semantic Versioning](https://semver.org/):
 Update version in `package.json` before publishing:
 ```json
 {
-  "version": "1.0.3"
+  "version": "3.0.0"
 }
 ```
 
@@ -429,6 +449,12 @@ Update version in `package.json` before publishing:
 **Issue: Missing files in published package**
 - Solution: Check `.vscodeignore` file to ensure important files aren't excluded
 - Verify `out/` directory contains all compiled files
+
+**Issue: Automatic publishing fails during release script**
+- Solution: Verify `.publish-secrets` file exists and contains valid tokens
+- Check that both `vsce` and `ovsx` CLI tools are installed globally
+- Ensure tokens have proper permissions for publishing
+- Review the script output for specific error messages
 
 ## Error Handling
 
@@ -471,6 +497,6 @@ MIT License - See LICENSE file for details
 ---
 
 **Author**: Gobinda Nandi  
-**Version**: 1.0.2  
+**Version**: 3.0.0  
 **Last Updated**: December 2025
 
