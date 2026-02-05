@@ -1,3 +1,16 @@
+# Release v3.0.1 - 2026-02-05
+
+## Improvements
+- **Major Version Release (3.0.0)**: Comprehensive code refactoring and enhancement of prompt saving logic across extension, prompt form, and prompt manager modules
+- **Code Quality**: Removed outdated `@since` annotations and cleaned up whitespace in source files for better maintainability
+- **User Experience**: Simplified prompt descriptions and improved README clarity by removing "AI" references and updating installation instructions
+- **Branding**: Removed "[Beta]" tag from README title for a cleaner, production-ready presentation
+- **Package Optimization**: Streamlined `.vscodeignore` configuration by removing CHANGELOG.md from ignored files
+- **Documentation**: Updated technical and process documentation to reflect automated publishing workflow and current version
+- **Release Notes**: Cleaned up release notes format by removing introductory text for a more concise presentation
+
+---
+
 # Release v3.0.0 - 2025-12-12
 
 This release introduces below new features, performance improvements, and bug fixes.
