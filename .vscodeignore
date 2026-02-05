@@ -13,7 +13,6 @@ release.sh
 release.md
 release.md.sample
 version.md
-CHANGELOG.md
 
 # Documentation (keep README.md)
 doc/**
