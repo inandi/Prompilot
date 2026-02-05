@@ -1,7 +1,7 @@
 /**
  * Prompt Manager Module
  * 
- * @author Gobinda Nandi <01ampoule_zero@icloud.com>
+ * @author Gobinda Nandi <gobinda.nandi.public@gmail.com>
  * @since 0.0.1 [06-12-2025]
  * @version 3.0.0
  * @copyright (c) 2025 Gobinda Nandi
@@ -34,7 +34,7 @@ export interface Prompt {
  * Manages storage and retrieval of prompts for both global and project-specific scopes.
  * Handles duplicate checking at appropriate scope levels and file operations.
  * 
- * @author Gobinda Nandi <01ampoule_zero@icloud.com>
+ * @author Gobinda Nandi <gobinda.nandi.public@gmail.com>
  * @since 0.0.1 [06-12-2025]
  * @version 0.0.1
  */

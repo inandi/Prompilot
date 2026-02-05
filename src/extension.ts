@@ -4,7 +4,7 @@
  * VS Code extension for managing custom instructions with a status bar button.
  * Provides functionality to create, edit, delete, and run prompts.
  * 
- * @author Gobinda Nandi <01ampoule_zero@icloud.com>
+ * @author Gobinda Nandi <gobinda.nandi.public@gmail.com>
  * @since 0.0.1 [06-12-2025]
  * @version 3.0.0
  * @copyright (c) 2025 Gobinda Nandi
