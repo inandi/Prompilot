@@ -1,3 +1,10 @@
+# Release v3.0.2 - 2026-02-05
+
+## Improvements
+- **Documentation**: Corrected author email in JSDoc and documentation comments across extension, prompt form, and prompt manager modules
+
+---
+
 # Release v3.0.1 - 2026-02-05
 
 ## Improvements
