@@ -1,3 +1,13 @@
+# Release v4.0.1 - 2026-04-05
+
+## Improvements
+- **Package metadata**: Added author details in `package.json`
+- **Extension icon**: Replaced `logo.png` with `logo.jpg` and removed the old image asset
+- **README**: Added a mailto link for Gobinda Nandi and related presentation tweaks
+- **Release template**: Minor formatting adjustments in `release.md.sample`
+
+---
+
 # Release v3.0.2 - 2026-02-05
 
 ## Improvements
