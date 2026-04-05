@@ -1,3 +1,20 @@
+# Release v4.0.2 - 2026-04-05
+
+## Improvements
+- **Branding**: Renamed user-facing extension identity from "Prompilot" to **Prompts** across README, `doc/TECHNICAL.md`, `doc/PROCESS.md`, and the status bar label in `extension.ts` for consistency with the marketplace display name (package name, command id, and `Prompilot.json` storage filenames unchanged for compatibility)
+
+---
+
+# Release v4.0.1 - 2026-04-05
+
+## Improvements
+- **Package metadata**: Added author details in `package.json`
+- **Extension icon**: Replaced `logo.png` with `logo.jpg` and removed the old image asset
+- **README**: Added a mailto link for Gobinda Nandi and related presentation tweaks
+- **Release template**: Minor formatting adjustments in `release.md.sample`
+
+---
+
 # Release v3.0.2 - 2026-02-05
 
 ## Improvements

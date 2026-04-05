@@ -1,15 +1,15 @@
 <div align="center">
-  <h1>Prompilot</h1>
+  <h1>Prompts</h1>
   <p><strong>Your Prompt Assistant</strong></p>
 </div>
 
-Tired of retyping the same prompts over and over? Prompilot makes it effortless to save, organize, and reuse your favorite instructions with just one click!
+Tired of retyping the same prompts over and over? **Prompts** makes it effortless to save, organize, and reuse your favorite instructions with just one click!
 
-## What is Prompilot?
+## What is Prompts?
 
-Prompilot is a simple yet necessary extension that helps you manage your custom prompts/commands and access them instantly from your status bar.
+**Prompts** is a simple yet necessary extension that helps you manage your custom prompts/commands and access them instantly from your status bar.
 
-## Why Use Prompilot?
+## Why Use Prompts?
 
 - **Save Time**: No more typing the same prompts repeatedly
 - **Stay Organized**: Keep all your prompts in one place, organized alphabetically
@@ -23,12 +23,12 @@ Prompilot is a simple yet necessary extension that helps you manage your custom 
 
 1. Open VS Code/Cursor
 2. Go to the Extensions view
-3. Search for "Prompilot"
+3. Search for **Prompts** (publisher: **iNandi**)
 4. Click Install
 
 ### First Steps
 
-1. **Find the Button**: Look for the Prompilot icon in the bottom-right corner (status bar)
+1. **Find the Button**: Look for the **Prompts** label in the bottom-right corner (status bar)
 2. **Add Your First Prompt**: Click the button and select "Add New"
 3. **Fill in the Details**:
    - Give it a short name (up to 25 characters)
@@ -50,7 +50,7 @@ When you click "Add New", you'll be asked for three things:
 
 ### Using Your Prompts
 
-1. Click the Prompilot button in the status bar
+1. Click the **Prompts** button in the status bar
 2. You'll see all your prompts listed alphabetically
 3. Click on any prompt to copy it to your clipboard
 4. Paste it (Cmd+V / Ctrl+V)
@@ -63,7 +63,7 @@ At the bottom of the prompt list, you'll find a "Manage" section where you can:
 
 ### Storage Locations
 
-Prompilot stores your prompts in JSON files for easy access and backup:
+The extension stores your prompts in JSON files for easy access and backup:
 
 - **Global Prompts**: Saved in your home directory at `~/.vscode/Prompilot.json`
   - On macOS/Linux: `~/.vscode/Prompilot.json`
@@ -75,7 +75,7 @@ Prompilot stores your prompts in JSON files for easy access and backup:
   - These prompts are only available in the current project
   - The `.vscode` folder is created automatically if it doesn't exist
 
-> **Note**: You can manually edit these JSON files if needed, or back them up to preserve your prompts.
+> **Note**: You can manually edit these JSON files if needed, or back them up to preserve your prompts. The filenames still use `Prompilot.json` for backward compatibility with existing data.
 
 ## Tips & Tricks
 
@@ -86,7 +86,7 @@ Prompilot stores your prompts in JSON files for easy access and backup:
 
 ## Support the Project
 
-If Prompilot has made your workflow easier, consider supporting (No Pressure):
+If **Prompts** has made your workflow easier, consider supporting (No Pressure):
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/igobinda)
 
@@ -102,4 +102,4 @@ This project is licensed under the MIT License - feel free to use it however you
 
 ---
 
-**Made with ❤️ by Gobinda Nandi**
+**Made with ❤️ by [Gobinda Nandi](mailto:gobinda.nandi.public@gmail.com)**

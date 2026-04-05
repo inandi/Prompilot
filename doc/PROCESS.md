@@ -1,6 +1,6 @@
-# Prompilot - Development and Publishing Process
+# Prompts - Development and Publishing Process
 
-This document outlines the complete process for running, developing, and publishing the Prompilot VS Code extension.
+This document outlines the complete process for running, developing, and publishing the **Prompts** VS Code extension (repository / package name: `prompilot`).
 
 ## Prerequisites
 
@@ -23,8 +23,8 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone and Install Dependencies
 
 ```bash
-# Navigate to the project directory
-cd Prompilot
+# Navigate to the project directory (clone folder name may vary)
+cd prompilot
 
 # Install dependencies
 npm install
@@ -242,7 +242,7 @@ Follow [Semantic Versioning](https://semver.org/):
 ## File Structure Reference
 
 ```
-Prompilot/
+prompilot/
 ├── src/                    # TypeScript source files
 ├── out/                    # Compiled JavaScript files (generated)
 ├── doc/                    # Documentation
