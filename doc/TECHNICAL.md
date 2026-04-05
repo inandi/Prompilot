@@ -1,15 +1,15 @@
-# Prompilot - Technical Documentation
+# Prompts - Technical Documentation
 
 ## Overview
 
-Prompilot is a VS Code extension built with TypeScript that provides a user-friendly interface for managing custom instructions/prompts. The extension stores prompts in JSON format and supports both global and project-specific scopes.
+**Prompts** (package identifier `prompilot`) is a VS Code extension built with TypeScript that provides a user-friendly interface for managing custom instructions/prompts. The extension stores prompts in JSON format and supports both global and project-specific scopes.
 
 ## Architecture
 
 ### File Structure
 
 ```
-Prompilot/
+prompilot/
 ├── src/
 │   ├── extension.ts          # Main extension entry point
 │   ├── promptManager.ts      # Handles prompt storage and retrieval
@@ -101,6 +101,7 @@ When retrieving prompts:
 
 - **Location**: Bottom-right of VS Code status bar
 - **Icon**: `$(comment-discussion)`
+- **Label**: `Prompts` (matches the extension display name)
 - **Action**: Opens the prompts menu
 
 ### Prompts Menu

@@ -1,5 +1,5 @@
 /**
- * Prompilot Extension Main Module
+ * Prompts Extension Main Module
  * 
  * VS Code extension for managing custom instructions with a status bar button.
  * Provides functionality to create, edit, delete, and run prompts.
@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Create status bar item
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-    statusBarItem.text = '$(comment-discussion) Prompilot';
+    statusBarItem.text = '$(comment-discussion) Prompts';
     statusBarItem.tooltip = 'Manage prompts';
     statusBarItem.command = 'prompilot.showPrompts';
     statusBarItem.show();
