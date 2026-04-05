@@ -1,3 +1,10 @@
+# Release v4.0.2 - 2026-04-05
+
+## Improvements
+- **Branding**: Renamed user-facing extension identity from "Prompilot" to **Prompts** across README, `doc/TECHNICAL.md`, `doc/PROCESS.md`, and the status bar label in `extension.ts` for consistency with the marketplace display name (package name, command id, and `Prompilot.json` storage filenames unchanged for compatibility)
+
+---
+
 # Release v4.0.1 - 2026-04-05
 
 ## Improvements
