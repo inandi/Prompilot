@@ -4,7 +4,12 @@
   "description": "Manage custom instructions with a status bar button",
   "version": "4.0.0",
   "publisher": "iNandi",
-  "icon": "media/logo.png",
+  "author": {
+    "name": "Gobinda Nandi",
+    "email": "gobinda.nandi.public@gmail.com",
+    "url": "https://inandi.github.io/portfolio/index.html"
+  },
+  "icon": "media/logo.jpg",
   "repository": {
     "type": "git",
     "url": "https://github.com/inandi/prompilot.git"
