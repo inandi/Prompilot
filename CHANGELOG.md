@@ -1,3 +1,10 @@
+# Release v4.1.1 - 2026-04-11
+
+## Improvements
+- **README**: Updated footer author credit to link to an X profile instead of a mailto email address
+
+---
+
 # Release v4.0.2 - 2026-04-05
 
 ## Improvements
