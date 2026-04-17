@@ -1,3 +1,10 @@
+# Release v4.1.2 - 2026-04-17
+
+## Improvements
+- **README**: Added header badges for Version, Updated On, and Released On using values derived from project metadata files
+
+---
+
 # Release v4.1.1 - 2026-04-11
 
 ## Improvements
