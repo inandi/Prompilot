@@ -1,6 +1,11 @@
 <div align="center">
   <h1>Prompts</h1>
   <p><strong>Your Prompt Assistant</strong></p>
+  <p>
+    <img alt="Version" src="https://img.shields.io/badge/Version-4.1.2-green" />
+    <img alt="Updated On" src="https://img.shields.io/badge/Updated%20On-April%202026-blue" />
+    <img alt="Released On" src="https://img.shields.io/badge/Released%20On-December%202025-orange" />
+  </p>
 </div>
 
 Tired of retyping the same prompts over and over? **Prompts** makes it effortless to save, organize, and reuse your favorite instructions with just one click!
