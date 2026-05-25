@@ -89,11 +89,17 @@ async function showPromptsMenu(): Promise<void> {
         a.shortName.localeCompare(b.shortName, undefined, { sensitivity: 'base' })
     );
 
+    const hideButton: vscode.QuickInputButton = {
+        iconPath: new vscode.ThemeIcon('eye-closed'),
+        tooltip: 'Hide for this workspace'
+    };
+
     // Add prompts alphabetically (names only, no details)
     sortedPrompts.forEach(prompt => {
         items.push({
             label: prompt.shortName,
-            description: prompt.scope
+            description: prompt.scope,
+            buttons: [hideButton]
         });
     });
 
@@ -113,6 +119,12 @@ async function showPromptsMenu(): Promise<void> {
 
     quickPick.items = items;
     quickPick.placeholder = 'Select a prompt to run, or add a new one';
+
+    quickPick.onDidTriggerItemButton(async (e) => {
+        const shortName = e.item.label.trim();
+        quickPick.dispose();
+        promptManager.hidePromptForWorkspace(shortName);
+    });
 
     quickPick.onDidAccept(async () => {
         const selected = quickPick.selectedItems[0];
