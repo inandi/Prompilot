@@ -26,6 +26,8 @@ export interface Prompt {
     detailedInstruction: string;
     /** The scope of the prompt: Global or Project-specific */
     scope: 'Global' | 'Project-specific';
+    /** Whether the prompt is hidden for the current workspace */
+    hidden?: boolean;
 }
 
 /**
@@ -155,7 +157,7 @@ export class PromptManager {
             promptMap.set(prompt.shortName, prompt);
         });
 
-        return Array.from(promptMap.values());
+        return Array.from(promptMap.values()).filter(p => !p.hidden);
     }
 
     /**
@@ -284,5 +286,45 @@ export class PromptManager {
      */
     getPrompt(shortName: string): Prompt | undefined {
         return this.getAllPrompts().find(p => p.shortName === shortName);
+    }
+
+    /**
+     * Hides a prompt for the current workspace.
+     * For global prompts, adds a hidden project-specific override.
+     * For project-specific prompts, marks the existing entry as hidden.
+     *
+     * @param {string} shortName - The short name of the prompt to hide
+     * @returns {void}
+     * @version 4.2.0
+     */
+    hidePromptForWorkspace(shortName: string): void {
+        if (!this.projectPromptsPath) {
+            vscode.window.showErrorMessage('No workspace folder found. Cannot hide prompt for this workspace.');
+            return;
+        }
+
+        const prompt = this.getPrompt(shortName);
+        if (!prompt) {
+            return;
+        }
+
+        const projectPrompts = this.getProjectPrompts();
+        const existingIndex = projectPrompts.findIndex(p => p.shortName === shortName);
+
+        if (existingIndex >= 0) {
+            // Update existing project entry to hidden
+            projectPrompts[existingIndex] = { ...projectPrompts[existingIndex], hidden: true };
+        } else {
+            // Add a hidden project-specific override for the global prompt
+            projectPrompts.push({
+                shortName: prompt.shortName,
+                detailedInstruction: prompt.detailedInstruction,
+                scope: 'Project-specific',
+                hidden: true
+            });
+        }
+
+        this.writePrompts(this.projectPromptsPath, projectPrompts);
+        vscode.window.showInformationMessage(`Prompt "${shortName}" hidden for this workspace.`);
     }
 }
